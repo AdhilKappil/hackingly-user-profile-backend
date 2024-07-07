@@ -16,10 +16,12 @@ const userSchema = mongoose.Schema({
         require:true
     },
     profileImg:{
-        type:String 
+        type:String,
+        default : ""
     },
     bannerImg:{
-        type:String 
+        type:String,
+        default : ""
     },
     isStatus:{
         type:Boolean,
