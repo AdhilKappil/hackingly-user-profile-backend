@@ -9,6 +9,7 @@ import cors from 'cors';
 
 const app = express();
 
+// cors setup
 app.use(
   cors({
     origin: ["https://hackingly.vercel.app","http://localhost:8000"],

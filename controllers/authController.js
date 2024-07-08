@@ -62,8 +62,8 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Update user profile
-// @route   PUT /api/addProfile
+// @desc    Update user profile and add user banner image
+// @route   PATCH /api/addProfile
 // @access  Private
 const addProfile = asyncHandler(async(req,res)=>{
   const user = await User.findById(req.body._id);
