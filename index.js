@@ -5,8 +5,18 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import router from './routes/route.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import cors from 'cors';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ["https://hackingly.vercel.app","http://localhost:8000"],
+    methods: ["GET,PUT,PATCH,POST,DELETE"],
+    credentials: true,
+    optionsSuccessStatus: 204,
+  })
+);
 
 // Middleware
 app.use(morgan('dev'));
