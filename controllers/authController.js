@@ -5,6 +5,7 @@ import User from '../models/user.js';
 // @route   POST /api/login
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
+  console.log("hi hu");
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
@@ -31,7 +32,7 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route   POST /api/register
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  console.log("helo");
+  
   const { name, email, password } = req.body;
   const userExists = await User.findOne({ email });
 
@@ -60,4 +61,32 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { loginUser, registerUser };
+
+// @desc    Update user profile
+// @route   PUT /api/addProfile
+// @access  Private
+const addProfile = asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.body._id);
+
+  if (user) {
+    if(req.body.profileImg){
+      user.profileImg = req.body.profileImg
+    }else{
+      user.bannerImg = req.body.bannerImg
+    }
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      profileImg:updatedUser.profileImg,
+      bannerImg:updatedUser.bannerImg
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+})
+
+export { loginUser, registerUser, addProfile};
